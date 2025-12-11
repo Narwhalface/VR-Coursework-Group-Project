@@ -11,11 +11,10 @@ public class Interact : MonoBehaviour
     private InputAction interaction;
     public float maxDistance = 3f;
     public Camera cam;
-    Transform selectedDoor;
+    Transform selectedObject;
     GameObject dragAnchor;
-
     GameObject hitObject;
-    public LayerMask doorLayer;
+    public LayerMask interactLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,7 +33,7 @@ public class Interact : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, doorLayer) && selectedDoor == null)
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, interactLayer) && selectedObject == null)
         {
             crosshair.SetActive(true);
             crosshair.GetComponent<UnityEngine.UI.Image>().sprite = ready;
@@ -42,36 +41,56 @@ public class Interact : MonoBehaviour
             if (interaction.ReadValue<float>() == 1)
             {
                 crosshair.GetComponent<UnityEngine.UI.Image>().sprite = grab;
-                selectedDoor = hit.collider.gameObject.transform;
+                selectedObject = hit.collider.gameObject.transform;
             }
-        }
-        else if (selectedDoor == null)
+        }else if (selectedObject == null)
         {
             crosshair.SetActive(false);
         }
 
 
-        if (selectedDoor != null)
+
+        if (selectedObject != null)
         {
-            HingeJoint hinge = selectedDoor.GetComponent<HingeJoint>();
-            JointMotor motor = hinge.motor; 
-
-            hinge.useMotor = true;
-            motor.force = 10;
-            motor.targetVelocity = 50;
-
-            hinge.motor = motor;;
-            if (interaction.ReadValue<float>() == 0)
+            if (selectedObject.CompareTag("Door") == true)
             {
-                crosshair.SetActive(false);
-                selectedDoor = null;
-                hinge.useMotor = false;
-                motor.targetVelocity = 0;
-                motor.force = 0;
-                hinge.motor = motor;
-                player.GetComponent<CharacterMovement>().MoveSpeed = 5f;
+                HingeJoint hinge = selectedObject.GetComponent<HingeJoint>();
+                JointMotor motor = hinge.motor; 
+
+                hinge.useMotor = true;
+                motor.force = 10;
+                motor.targetVelocity = 50;
+
+                hinge.motor = motor;;
+                if (interaction.ReadValue<float>() == 0)
+                {
+                    crosshair.SetActive(false);
+                    selectedObject = null;
+                    hinge.useMotor = false;
+                    motor.targetVelocity = 0;
+                    motor.force = 0;
+                    hinge.motor = motor;
+                    player.GetComponent<CharacterMovement>().MoveSpeed = 5f;
+                }
+            }else if (selectedObject.CompareTag("Candle") == true)
+            {
+                
+                //selectedObject.GetChild(0).GetComponent<Light>().enabled = !selectedObject.GetChild(0).GetComponent<Light>().enabled;
+                // Prevent toggling when key held by only toggling on key press (rising edge)
+                if (interaction.WasPressedThisFrame())
+                {
+                    ParticleSystem.EmissionModule em = selectedObject.GetChild(0).GetComponent<ParticleSystem>().emission;
+                    em.enabled = !em.enabled;
+                }
+
+
             }
 
+            if (interaction.ReadValue<float>() == 0)
+            {
+                selectedObject = null;
+                crosshair.SetActive(false);
+            }
         }
     }
 }
