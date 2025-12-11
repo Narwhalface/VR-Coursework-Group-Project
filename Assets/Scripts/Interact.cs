@@ -72,6 +72,18 @@ public class Interact : MonoBehaviour
                     hinge.motor = motor;
                     player.GetComponent<CharacterMovement>().MoveSpeed = 5f;
                 }
+            }else if (selectedObject.CompareTag("Candle") == true)
+            {
+                
+                //selectedObject.GetChild(0).GetComponent<Light>().enabled = !selectedObject.GetChild(0).GetComponent<Light>().enabled;
+                // Prevent toggling when key held by only toggling on key press (rising edge)
+                if (interaction.WasPressedThisFrame())
+                {
+                    ParticleSystem.EmissionModule em = selectedObject.GetChild(0).GetComponent<ParticleSystem>().emission;
+                    em.enabled = !em.enabled;
+                }
+
+
             }
 
             if (interaction.ReadValue<float>() == 0)
