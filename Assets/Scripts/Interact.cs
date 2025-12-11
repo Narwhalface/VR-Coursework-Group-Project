@@ -53,75 +53,25 @@ public class Interact : MonoBehaviour
 
         if (selectedDoor != null)
         {
-
             HingeJoint hinge = selectedDoor.GetComponent<HingeJoint>();
             JointMotor motor = hinge.motor; 
 
-            if (dragAnchor == null)
-            {
-                dragAnchor = new GameObject("Drag Anchor");
-                dragAnchor.transform.position = hit.point;
-                dragAnchor.transform.parent = selectedDoor;
-            }
+            hinge.useMotor = true;
+            motor.force = 10;
+            motor.targetVelocity = 50;
 
-            if (hitObject == null)
-            {
-                hitObject = new GameObject("Hit Object");
-                hitObject.transform.position = hit.point;
-                hitObject.transform.parent = selectedDoor;
-            }
-
-            Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            dragAnchor.transform.position = ray.GetPoint(Mathf.Clamp(Vector3.Distance(hitObject.transform.position, transform.position), 0.5f, 2f));
-            dragAnchor.transform.rotation = selectedDoor.rotation;
-
-            float delta = Mathf.Pow(Vector3.Distance(dragAnchor.transform.position, hitObject.transform.position), 3);
-
-            player.GetComponent<CharacterMovement>().MoveSpeed = Mathf.Clamp(5f/(Vector3.Distance(dragAnchor.transform.position, hitObject.transform.position)*5), 0f, 5f);
-
-            float speedMultiplier = 500f;
-            if (Mathf.Abs(selectedDoor.forward.z) > 0.5f)
-            {
-                if (dragAnchor.transform.position.x > hitObject.transform.position.x)
-                {
-                    motor.targetVelocity = delta * -speedMultiplier * Time.deltaTime;
-                }
-                else
-                {
-                    motor.targetVelocity = delta * speedMultiplier * Time.deltaTime;
-                }
-            }
-            else
-            {
-                if (dragAnchor.transform.position.z > hitObject.transform.position.z)
-                {
-                    motor.targetVelocity = delta * -speedMultiplier * Time.deltaTime;
-                }
-                else
-                {
-                    motor.targetVelocity = delta * speedMultiplier * Time.deltaTime;
-                }
-            }
-            hinge.motor = motor;
-
-            if (interaction.ReadValue<float>() == 0 || Vector3.Distance(dragAnchor.transform.position, hitObject.transform.position) > maxDistance)
+            hinge.motor = motor;;
+            if (interaction.ReadValue<float>() == 0)
             {
                 crosshair.SetActive(false);
                 selectedDoor = null;
+                hinge.useMotor = false;
                 motor.targetVelocity = 0;
+                motor.force = 0;
                 hinge.motor = motor;
-                Destroy(dragAnchor);
-                Destroy(hitObject);
                 player.GetComponent<CharacterMovement>().MoveSpeed = 5f;
             }
 
-            
-
-            if (dragAnchor != null)
-            {
-                Debug.DrawLine(cam.transform.position, dragAnchor.transform.position, Color.green);
-                Debug.DrawLine(hitObject.transform.position, dragAnchor.transform.position, Color.red);
-            }
         }
     }
 }
