@@ -640,7 +640,7 @@ MonoBehaviour:
   player: {fileID: 696317643}
   maxDistance: 3
   cam: {fileID: 1037240562}
-  doorLayer:
+  interactLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!143 &696317648
@@ -7567,9 +7567,9 @@ GameObject:
   - component: {fileID: 8330360390708103164}
   - component: {fileID: 7381656425237439953}
   - component: {fileID: 2344271848313879616}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.001
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14566,7 +14566,7 @@ GameObject:
   - component: {fileID: 7570227585930027606}
   m_Layer: 6
   m_Name: Cylinder.1075
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16341,13 +16341,35 @@ GameObject:
   - component: {fileID: 3471088244393155626}
   - component: {fileID: 1358408821070289320}
   - component: {fileID: 3045270235559527119}
-  m_Layer: 0
+  - component: {fileID: 8619740990971852156}
+  m_Layer: 6
   m_Name: Torch.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &8619740990971852156
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8619740990971852155}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05424602, y: 0.059008993, z: 0.4780426}
+  m_Center: {x: 0.0024422072, y: 0.0008295503, z: -0.22902107}
 --- !u!33 &8655709438447088683
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17022,13 +17044,35 @@ GameObject:
   - component: {fileID: 1125352909546712210}
   - component: {fileID: 3236313509244899275}
   - component: {fileID: 8900308086936743449}
-  m_Layer: 0
+  - component: {fileID: 8969363498717015298}
+  m_Layer: 6
   m_Name: Torch.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &8969363498717015298
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969363498717015297}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05424602, y: 0.059008993, z: 0.4780426}
+  m_Center: {x: 0.0024422072, y: 0.0008295503, z: -0.22902107}
 --- !u!4 &8969494806963754554
 Transform:
   m_ObjectHideFlags: 0
