@@ -9,14 +9,14 @@ public class CharacterMovement : MonoBehaviour
     private InputAction jump;
 
     public float MoveSpeed = 5f;
-    public float jumpHeight = 3;
+    public float jumpHeight = 1.4f;
     public float terminalVelocity = 150f;
-    public float gravity = 15f;
+    public float gravity = -15f;
     Vector3 velocity;
     public float inertiaDamping = 5f;
     private bool isGrounded = false;
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.2f;
     public LayerMask groundMask;
 
     

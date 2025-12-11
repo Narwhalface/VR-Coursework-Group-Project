@@ -79,7 +79,7 @@ public class Interact : MonoBehaviour
 
             player.GetComponent<CharacterMovement>().MoveSpeed = Mathf.Clamp(5f/(Vector3.Distance(dragAnchor.transform.position, hitObject.transform.position)*5), 0f, 5f);
 
-            float speedMultiplier = 100f;
+            float speedMultiplier = 500f;
             if (Mathf.Abs(selectedDoor.forward.z) > 0.5f)
             {
                 if (dragAnchor.transform.position.x > hitObject.transform.position.x)
