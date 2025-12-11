@@ -14587,14 +14587,14 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 1
   m_Spring:
-    spring: 0
-    damper: 0
+    spring: 10
+    damper: 10
     targetPosition: 0
   m_UseMotor: 1
   m_Motor:
     targetVelocity: 0
-    force: 50
-    freeSpin: 1
+    force: 0
+    freeSpin: 0
   m_UseLimits: 1
   m_ExtendedLimits: 0
   m_UseAcceleration: 1
