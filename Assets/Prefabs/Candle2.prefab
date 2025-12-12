@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 462373391530156452}
-  - component: {fileID: 4309934785132159014}
+  - component: {fileID: -6676380625762809401}
   m_Layer: 0
   m_Name: Candle2
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1657845389018131599}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &4309934785132159014
+--- !u!54 &-6676380625762809401
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

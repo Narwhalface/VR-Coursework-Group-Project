@@ -7,6 +7,7 @@ public class Interact : MonoBehaviour
     public Sprite ready;
     public Sprite grab;
     public GameObject player;
+    public GameObject bookKeyTeleporter;
     private PlayerInput playerInput;
     private InputAction interaction;
     public float maxDistance = 3f;
@@ -15,6 +16,7 @@ public class Interact : MonoBehaviour
     GameObject dragAnchor;
     GameObject hitObject;
     public LayerMask interactLayer;
+    bool bookKeyActivated;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,6 +33,11 @@ public class Interact : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (bookKeyTeleporter != null)
+        {
+            bookKeyTeleporter.SetActive(bookKeyActivated);
+        }
+
         RaycastHit hit;
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, interactLayer) && selectedObject == null)
@@ -81,6 +88,28 @@ public class Interact : MonoBehaviour
                 {
                     ParticleSystem.EmissionModule em = selectedObject.GetChild(0).GetComponent<ParticleSystem>().emission;
                     em.enabled = !em.enabled;
+                }
+
+
+            }else if (selectedObject.CompareTag("BookKey") == true || selectedObject.root.CompareTag("BookKey") == true)
+            {
+                if (interaction.WasPressedThisFrame())
+                {
+                    Transform book = selectedObject.CompareTag("BookKey") ? selectedObject : selectedObject.root;
+
+                    if (bookKeyTeleporter != null)
+                    {
+                        bookKeyActivated = true;
+                        bookKeyTeleporter.SetActive(true);
+                        book.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Interact: Book key teleporter reference is missing.");
+                    }
+
+                    selectedObject = null;
+                    crosshair.SetActive(false);
                 }
 
 
