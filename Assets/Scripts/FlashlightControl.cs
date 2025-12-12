@@ -50,7 +50,7 @@ public class FlashlightControl : MonoBehaviour
             flashlight.GetComponents<AudioSource>()[1].Stop();
             flashlight.GetComponents<AudioSource>()[0].Play();
             prompt.SetActive(false);
-            charge += Time.deltaTime * 50f;
+            charge += Time.deltaTime * 100f;
             charge = Mathf.Clamp(charge, 0f, 6);
             flashlight.GetComponent<Light>().intensity = Mathf.Clamp(charge + flicker, 0f, 3f)*1.5f;
         }

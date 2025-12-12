@@ -9,6 +9,8 @@ public class PlateTeleport : MonoBehaviour
     [SerializeField] private LayerMask playerMask = ~0;
     [SerializeField] private float retriggerDelay = 0.5f;
 
+    public GameObject soundObject;
+
     private float nextAvailableTime;
 
     private void Awake()
@@ -50,6 +52,8 @@ public class PlateTeleport : MonoBehaviour
 
     private void Teleport(CharacterMovement movement)
     {
+        soundObject.GetComponents<AudioSource>()[1].Play();
+        soundObject.GetComponents<AudioSource>()[0].Play();
         Transform playerTransform = movement.transform;
         CharacterController controller = movement.controller != null
             ? movement.controller

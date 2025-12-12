@@ -11,6 +11,8 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private string requiredTag = "Player";
     [SerializeField] private float retriggerDelay = 0.5f;
 
+
+    public GameObject soundObject;
     private float nextAvailableTime;
     private bool loading;
 
@@ -30,6 +32,8 @@ public class SceneTransition : MonoBehaviour
             return;
         }
 
+
+
         Vector3 checkCenter = transform.TransformPoint(detectionOffset);
         Collider[] hits = Physics.OverlapSphere(checkCenter, detectionRadius, playerMask, QueryTriggerInteraction.Collide);
         for (int i = 0; i < hits.Length; i++)
@@ -38,6 +42,10 @@ public class SceneTransition : MonoBehaviour
             if (movement == null && !IsPlayerCollider(hits[i]))
             {
                 continue;
+            }
+            if (!soundObject.GetComponents<AudioSource>()[2].isPlaying) 
+            {
+                soundObject.GetComponents<AudioSource>()[2].Play();
             }
 
             BeginTransition();
