@@ -82,6 +82,8 @@ public class Interact : MonoBehaviour
             }else if (selectedObject.CompareTag("Candle") == true)
             {
                 
+                //selectedObject.GetChild(0).GetComponent<Light>().enabled = !selectedObject.GetChild(0).GetComponent<Light>().enabled;
+                // Prevent toggling when key held by only toggling on key press (rising edge)
                 if (interaction.WasPressedThisFrame())
                 {
                     ParticleSystem.EmissionModule em = selectedObject.GetChild(0).GetComponent<ParticleSystem>().emission;
